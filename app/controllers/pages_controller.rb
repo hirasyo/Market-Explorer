@@ -70,7 +70,7 @@ class PagesController < ApplicationController
 
     if params["wowma"]
       # Wowma!のURLからhtml情報を抽出
-      @html,@charset = search_html(url_wowma(params[:keyword]))
+      @html = search_html_wowma(url_wowma(params[:keyword]))
       # 抽出したhtmlをパース(解析)してオブジェクトを作成
       @result_wowma = Nokogiri::HTML.parse(@html,nil, 'utf-8')
       # 解析オブジェクトから必要な情報を抽出
@@ -131,14 +131,11 @@ class PagesController < ApplicationController
       return html,charset
     end
 
-    def search_html_binary(url)
-      charset = nil
-      search_url = URI.encode url
-      html = open(search_url, "r:binary") do |f|
-        charset = f.charset # 文字種別を取得
-        f.read # htmlを読み込んで変数htmlに渡す
-      end
-      return html,charset
+    def search_html_wowma(url)
+      search_url =  url.encode("shift_jis")
+      search = URI.encode search_url
+      html = open(search).read # htmlを読み込んで変数htmlに渡す
+      return html
     end
 
     def get_info_yahoo(result)
@@ -147,7 +144,7 @@ class PagesController < ApplicationController
       result.xpath('//div[@id="list01"]/table/tr/td[@class="i"]/..').each do |node|
 
         sale_now = true
-        price_only_number = node.css('td.pr2').inner_text.gsub(/\¥|\,|\s|円/,"") #数値だけのお値段
+        price_only_number = node.css('td.pr2').inner_text.gsub(/\¥|\,|\s|円|値下げ交渉あり/,"") #数値だけのお値段
         # 画面上の条件指定と合致するもののみ表示対象とする
         data_jugde(sale_now, price_only_number)
         if @get_info_this_data
@@ -156,7 +153,7 @@ class PagesController < ApplicationController
           @temp_result.store("img", node.css('img').attribute('src').value)
           @temp_result.store("link", node.css('a').attribute('href').value)
           @temp_result.store("name", node.css('h3').inner_text)
-          @temp_result.store("price", node.css('td.pr2').inner_text.gsub(node.css('td.pr2.p').inner_text,""))
+          @temp_result.store("price", node.css('td.pr2').inner_text.gsub(/\¥|\s|値下げ交渉あり/,""))
           @temp_result.store("target", "ヤフオク")
           @temp_result.store("sold_out", false)
 

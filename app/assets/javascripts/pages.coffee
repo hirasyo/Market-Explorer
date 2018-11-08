@@ -7,8 +7,10 @@ $ ->
   $target_flema = $('.target_flema')
   $target_used_all = $('.target_used_all')
   $target_used = $('.target_used')
+  $products = $('.products')
   $smartphone_nav = $('.smartphone_nav')
   $move_top = $('.move_top')
+  $disabled_wrapper = $('.disabled_wrapper')
   userAgent = window.navigator.userAgent.toLowerCase()
 
 
@@ -41,8 +43,16 @@ $ ->
       response = event.detail[0].response
       $('#updated_by_ajax').html(response)
       $loading.fadeOut speed
-      if userAgent.indexOf("iPhone") >= 0 || userAgent.indexOf("Android") >= 0
+      $move_top.removeClass("hidden")
+      $smartphone_nav.removeClass("hidden")
+      if userAgent.indexOf("iphone") >= 0 || userAgent.indexOf("android") >= 0 || userAgent.indexOf("ipad") == 13
           $search_wrapper.addClass("dispnone_search")
+          $search_wrapper.removeClass("fadein")
+          $search_wrapper.addClass("fadeout")
+          $disabled_wrapper.removeClass("disabled_wrap")
 
   $(document).on 'touchstart','.smartphone_nav', ->
-      $search_wrapper.toggleClass("dispnone_search")
+      $search_wrapper.removeClass("dispnone_search")
+      $search_wrapper.toggleClass("fadein")
+      $search_wrapper.toggleClass("fadeout")
+      $disabled_wrapper.toggleClass("disabled_wrap")

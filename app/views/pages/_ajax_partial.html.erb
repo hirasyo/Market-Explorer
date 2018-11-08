@@ -3,14 +3,14 @@
     <div class="count_result">
       <div class="flema_count">
         <% if result_count.has_key?("yahoo") %>
-          <span class="count_text">ヤフオク：<%= result_count["yahoo"] %>件</span>
+          <span class="count_text">ヤフオク　：<%= result_count["yahoo"] %>件</span>
         <% else %>
-          <span class="count_zero">ヤフオク：０件</span>
+          <span class="count_zero">ヤフオク　：０件</span>
         <% end %>
         <% if result_count.has_key?("mercari") %>
-          <span class="count_text">メルカリ：<%= result_count["mercari"] %>件</span>
+          <span class="count_text">メルカリ　：<%= result_count["mercari"] %>件</span>
         <% else %>
-          <span class="count_zero">メルカリ：０件</span>
+          <span class="count_zero">メルカリ　：０件</span>
         <% end %>
         <% if result_count.has_key?("jimoty") %>
           <span class="count_text">ジモティー：<%= result_count["jimoty"] %>件</span>
@@ -18,9 +18,9 @@
           <span class="count_zero">ジモティー：０件</span>
         <% end %>
         <% if result_count.has_key?("rakuma") %>
-          <span class="count_text">ラクマ：<%= result_count["rakuma"] %>件</span>
+          <span class="count_text">ラクマ　　：<%= result_count["rakuma"] %>件</span>
         <% else %>
-          <span class="count_zero">ラクマ：０件</span>
+          <span class="count_zero">ラクマ　　：０件</span>
         <% end %>
       </div>
       <div class="used_count">
@@ -30,14 +30,14 @@
           <span class="count_zero">楽天市場：０件</span>
         <% end %>
         <% if result_count.has_key?("hardoff") %>
-          <span class="count_text">HardOff：<%= result_count["hardoff"] %>件</span>
+          <span class="count_text">HardOff ：<%= result_count["hardoff"] %>件</span>
         <% else %>
-          <span class="count_zero">HardOff：０件</span>
+          <span class="count_zero">HardOff ：０件</span>
         <% end %>
         <% if result_count.has_key?("wowma") %>
-          <span class="count_text">Wowma!：<%= result_count["wowma"] %>件</span>
+          <span class="count_text">Wowma!  ：<%= result_count["wowma"] %>件</span>
         <% else %>
-          <span class="count_zero">Wowma!：０件</span>
+          <span class="count_zero">Wowma!  ：０件</span>
         <% end %>
       </div>
     </div>
@@ -68,10 +68,3 @@
     <% end %>
     </div>
   </div>
-  <div class="smartphone_nav dispnone_nav" ontouchstart="">
-    <div class="smartphone_nav_bar_top"></div>
-    <div class="smartphone_nav_bar_center"></div>
-    <div class="smartphone_nav_bar_bottom"></div>
-  </div>
-
-  <div class="move_top" ontouchstart=""></div>

@@ -5,7 +5,7 @@ body {
 .search_wrapper{
   width:380px;
   padding: 10px 20px;
-  background-color: rgba(204, 210, 128, 0.25);
+  background-color: rgb(233, 241, 202);
   position: fixed;
   z-index: 3;
 
@@ -108,8 +108,8 @@ body {
 
       .search_btn{
         width: 150px;
-        padding: 10px 0px 5px 0px;
-        font-size: 2.0em;
+        padding: 10px 0px;
+        font-size: 28px;
 
       }
 
@@ -119,6 +119,18 @@ body {
 
       }
     }
+
+    .js-loading{
+      display: none;// はじめは非表示
+      height: 80px;
+      width: 130px;
+      float: right;
+
+      .loading_icon{
+        z-index: 1000;
+      }
+    }
+
   }
 }
 
@@ -126,15 +138,18 @@ body {
 
   .count_result{
     width: 720px;
+    height: 140px;
     background-color: rgb(251, 238, 217);
-    padding: 20px 23px 10px 23px;
+    padding: 20px 23px;
     position: fixed;
     z-index: 2;
     opacity: 0.9;
 
     .flema_count, .used_count{
+      width: 140px;
       vertical-align: middle;
       text-align: left;
+      float: left;
 
     }
 
@@ -159,7 +174,7 @@ body {
   }
 
   .products{
-    padding: 78px 0px 0px 0px;
+    padding: 140px 0px 0px 0px;
     width: 720px;
     background-color: rgba(141, 185, 85, 0.45);
 
@@ -277,6 +292,7 @@ body {
   border: 1px solid black;
   border-radius: 3px;
   opacity: 0.5;
+  z-index: 2;
 }
 .move_top:before{
   content: "";
@@ -335,19 +351,10 @@ body {
 .absolute {
     position: absolute;
 }
-
-.js-loading{
-  display: none;// はじめは非表示
-  height: 100%;
-  width: 100%;
-  z-index: 1000;
-
-  .loading_icon{
-    top: 500px;
-    left: 400px;
-    position: fixed;
-  }
+.hidden{
+    display: none;
 }
+
 
 
 @media (max-width: 1199.99px)  {
@@ -358,13 +365,13 @@ body {
     width: 540px;
     padding-left: 80px;
 
-    .count_result, .products{
+    .count_result{
       width: 540px;
 
-      .flema_count, .used_count{
-        width: 520px;
+    }
 
-        }
+    .products{
+      width: 540px;
 
       .product_item{
         width: 135px;
@@ -393,14 +400,14 @@ body {
               font-size: 10.5px;
 
             }
-        }
+          }
 
         .product_item_target:hover{
 
-            .product_item_target_text{
-              font-size: 10.5px;
+          .product_item_target_text{
+            font-size: 10.5px;
 
-            }
+          }
         }
 
       }
@@ -442,7 +449,7 @@ body {
 }
 
 
-@media (max-width: 767.99px)  {
+@media screen and (max-width: 767.99px)  {
 /* スマートフォンだけ以下を適用 */
 
   .container{
@@ -453,8 +460,19 @@ body {
     }
   }
 
+
 }
 
+@media screen and (max-width: 369.99px)  {
+/* 小さいスマートフォンだけ以下を適用 */
+
+  .search_wrapper{
+    width: 330px;
+    padding: 10px;
+
+  }
+
+}
 
 @media (min-width: 991.99px)  {
 /* パソコン上は不要なマーク */
@@ -476,14 +494,74 @@ body {
 
 }
 
-@media (max-width: 991.99px)  {
+@media screen and (max-width: 990.99px)  {
 /* iPad以下で検索フォームを表示しない */
+/* 検索結果のレイアウトを調整 */
 
   .dispnone_search{
     display: none;
   }
 
-/* 検索結果のレイアウトを調整 */
+  .disabled_wrap{
+    pointer-events: none;
+    background-color: white;
+    opacity: 0.3;
+    z-index: 4;
 
+  }
 
+  .fadein{
+    animation: fadein 0.5s ;
+    opacity: 1;
+    visibility: visible;
+
+  }
+
+  .fadeout{
+    animation: fadeout 0.5s ;
+    opacity: 0;
+    visibility: hidden;
+
+  }
+
+  .search_wrapper{
+    right: 0;
+    height: 100%;
+    transition: opacity 0.5s, visibility 0.5s;
+
+  }
+
+  .count_result{
+    width: 540px;
+    padding: 20px 23px 20px 23px;
+
+    .flema_count, .used_count{
+      width:120px;
+      float:left;
+
+      }
+  }
+
+  .products{
+    padding: 140px 0px 0px 0px;
+
+  }
+
+  @keyframes fadein {
+    0%{
+      transform: translateX(380px);
+    }
+    100% {
+      transform: translateX(0px);
+    }
+  }
+
+  @keyframes fadeout {
+    0%{
+      transform: translateX(0px);
+    }
+    100% {
+      transform: translateX(380px);
+    }
+  }
 }

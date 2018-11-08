@@ -50,16 +50,31 @@
               </div>
               <div class="search_status_price">
                 <%= form.label("上限金額") %>
-                <%= number_field(:conditions_price, :max_price, class: 'max_price_box') %><span class="search_status_price_max"> 円まで</span><br>
+                <%= number_field(:conditions_price, :max_price, class: 'max_price_box', min: '0', step: '100') %>
+                <span class="search_status_price_max"> 円まで</span><br>
               </div>
             </div>
-            <div class="search_status_search_btn"><%= form.submit("検索する", class: "search_btn", data: { disable_with: '検索中...' } ) %></div>
+            <div class="search_status_search_btn">
+              <%= form.submit("検索する", class: "search_btn", data: { disable_with: '検索中...' } ) %>
+              <div class="js-loading"><%= image_tag "loading.gif", class: "loading_icon" %></div>
+            </div>
           <% end %>
         </div>
-        ※チェックされているサイトより、<br>最大４０〜６０件の情報を抽出し統合します。<br>
-        ※Wowma!のみ、日本語検索ができません<br>  （対応中です（^^;)）
+        チェックされているサイトより、<br>最大４０〜６０件の情報を抽出し統合します。<br>
       </div>
     </div>
-    <div id="updated_by_ajax" >
+
+    <div class="smartphone_nav hidden dispnone_nav" ontouchstart="">
+      <div class="smartphone_nav_bar_top"></div>
+      <div class="smartphone_nav_bar_center"></div>
+      <div class="smartphone_nav_bar_bottom"></div>
+    </div>
+
+    <div class="move_top hidden" ontouchstart=""></div>
+
+    <div class="disabled_wrapper">
+      <div id="updated_by_ajax" >
+    </div>
+
   </div>
 </div>
