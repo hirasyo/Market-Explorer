@@ -124,7 +124,7 @@ class PagesController < ApplicationController
     def search_html(url)
       charset = nil
       search_url = URI.encode url
-      html = open(search_url) do |f|
+      html = open(search_url, 'User-Agent' => 'ruby') do |f|
         charset = f.charset # 文字種別を取得
         f.read # htmlを読み込んで変数htmlに渡す
       end
