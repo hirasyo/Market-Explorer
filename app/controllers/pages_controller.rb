@@ -20,9 +20,9 @@ class PagesController < ApplicationController
 
     if params["mercari"]
       # メルカリのURLからhtml情報を抽出
-      @html,@charset = search_html(url_mercari(params[:keyword]))
+      @html = search_html_mercari(url_mercari(params[:keyword]))
       # 抽出したhtmlをパース(解析)してオブジェクトを作成
-      @result_mercari = Nokogiri::HTML.parse(@html, nil, @charset)
+      @result_mercari = Nokogiri::HTML.parse(@html, nil, 'utf-8')
       # 解析オブジェクトから必要な情報を抽出
       get_info_mercari(@result_mercari)
 
@@ -124,11 +124,17 @@ class PagesController < ApplicationController
     def search_html(url)
       charset = nil
       search_url = URI.encode url
-      html = open(search_url, 'User-Agent' => 'ruby') do |f|
+      html = open(search_url) do |f|
         charset = f.charset # 文字種別を取得
         f.read # htmlを読み込んで変数htmlに渡す
       end
       return html,charset
+    end
+
+    def search_html_mercari(url)
+      search_url = URI.encode url
+      html = open(search_url, 'User-Agent' => 'ruby').read # htmlを読み込んで変数htmlに渡す
+      return html
     end
 
     def search_html_wowma(url)
