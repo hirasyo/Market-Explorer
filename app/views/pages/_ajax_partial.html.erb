@@ -49,9 +49,9 @@
           <%= link_to result["link"], target: "_blank" do %>
             <%= image_tag result["img"], class:"image", alt:"No Image" %>
             <% if result["sold_out"] %>
-              <%= image_tag 'sold_out.png', class:"sold_out_icon absolute"%>
+              <%= image_tag "sold_out.png", class:"sold_out_icon absolute"%>
             <% end %>
-            <%= image_tag 'black.jpeg', class:"image_black absolute"%>
+            <%= image_tag "black.jpeg", class:"image_black absolute"%>
           <% end %>
           <div class="product_item_price absolute"><span class="product_item_price_text"><%= result["price"] %></span><br>
             <% if result["sold_out"] %>
