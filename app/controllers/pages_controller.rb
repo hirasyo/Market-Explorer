@@ -133,7 +133,7 @@ class PagesController < ApplicationController
 
     def search_html_mercari(url)
       search_url = URI.encode url
-      html = open(search_url, "user-agent"=>"Ruby")# htmlを読み込んで変数htmlに渡す
+      html = open(search_url, "User-Agent"=>"Ruby")# htmlを読み込んで変数htmlに渡す
       return html
     end
 
