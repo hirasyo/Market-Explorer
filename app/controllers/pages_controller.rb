@@ -20,7 +20,7 @@ class PagesController < ApplicationController
 
     if params["mercari"]
       # メルカリのURLからhtml情報を抽出
-      @html = search_html_mercari(url_mercari(params[:keyword]))
+      @html = search_html(url_mercari(params[:keyword]))
       # 抽出したhtmlをパース(解析)してオブジェクトを作成
       @result_mercari = Nokogiri::HTML.parse(@html, nil, 'utf-8')
       # 解析オブジェクトから必要な情報を抽出
@@ -50,7 +50,7 @@ class PagesController < ApplicationController
 
     if params["rakuten"]
       # 楽天市場のURLからhtml情報を抽出
-      @html,@charset = search_html(url_rakuten(params[:keyword]))
+      @html,@charset = search_html_rakuten(url_rakuten(params[:keyword]))
       # 抽出したhtmlをパース(解析)してオブジェクトを作成
       @result_rakuten = Nokogiri::HTML.parse(@html, nil, @charset)
       # 解析オブジェクトから必要な情報を抽出
@@ -131,7 +131,7 @@ class PagesController < ApplicationController
       return html,charset
     end
 
-    def search_html_mercari(url)
+    def search_html_rakuten(url)
       search_url = URI.encode url
       html = open(search_url, "User-Agent"=>"Ruby")# htmlを読み込んで変数htmlに渡す
       return html
