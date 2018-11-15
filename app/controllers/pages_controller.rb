@@ -132,8 +132,11 @@ class PagesController < ApplicationController
     end
 
     def search_html_mercari(url)
+      opt = {}
+      opt['User-Agent'] = 'Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv 11.0) like Gecko'
+
       search_url = URI.encode url
-      html = open(search_url, "User-Agent" => "ruby").read # htmlを読み込んで変数htmlに渡す
+      html = open(search_url, opt).read # htmlを読み込んで変数htmlに渡す
       return html
     end
 
