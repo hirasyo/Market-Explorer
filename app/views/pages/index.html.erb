@@ -36,7 +36,7 @@
                   <%= check_box_tag "wowma", true, true, {:class => "target_used"}  %><%= label_tag("wowma", 'Wowma!', class:"target_text") %>
                 </span>
               </div>
-            </div><br>
+            </div>
             <div class="search_status_keyword_title"><%= form.label("検索ワード") %></div>
             <div class="search_status_keyword">
               <%= form.text_field :keyword , class: 'keyword_text_field'%><br>
@@ -60,7 +60,7 @@
             </div>
           <% end %>
         </div>
-        チェックされているサイトより、<br>最大４０〜６０件の情報を抽出し統合します。<br>
+        <span class="search_bikou">チェックされているサイトより、<br>最大４０〜６０件の情報を抽出し統合します。</span>
       </div>
     </div>
 
