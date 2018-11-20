@@ -478,6 +478,14 @@ body {
       .products{
         width: 405px;
 
+        .product_item_price_text{
+          font-size: 22px;
+        }
+
+        .product_item_price_sold_out{
+          display: none;
+        }
+
       }
     }
 
