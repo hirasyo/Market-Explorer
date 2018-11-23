@@ -44,6 +44,9 @@ $ ->
   $(document).on 'click','.move_top', ->
       $('body, html').animate scrollTop: 0, 'middle'
 
+  $(document).on 'touchstart','.move_top', ->
+      $('body, html').animate scrollTop: 0, 'middle'
+
   $('#request_ajax_update')
     .on 'ajax:complete', (event) ->
       response = event.detail[0].response
