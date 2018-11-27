@@ -5,7 +5,6 @@ class PagesController < ApplicationController
   def search
     @result_all = []
     @result_count = {}
-    @max_price = params[:conditions_price][:max_price].to_i
 
     # 各種サイトのチェックに応じてデータを持ってくる
     if params["yahoo"]
@@ -443,12 +442,7 @@ class PagesController < ApplicationController
     def data_jugde(sale_now,price_only_number)
 
       target_sale(sale_now)
-
-      if @max_price == 0
-        @search_target_price = true
-      else
-        target_price(price_only_number)
-      end
+      target_price(price_only_number)
 
       if @search_target_sale && @search_target_price then
         @get_info_this_data = true
@@ -461,29 +455,57 @@ class PagesController < ApplicationController
     def target_sale(sale_now)
 
       case params[:conditions_selected]
-      when "0" #全ての商品
-        @search_target_sale = true
-
-      when "1" #販売中の商品
-        if sale_now
+        when "0" #全ての商品
           @search_target_sale = true
-        else
-          @search_target_sale = false
-        end
 
-      when "2" #売り切れの商品
-        if sale_now
-          @search_target_sale = false
-        else
-          @search_target_sale = true
-        end
+        when "1" #販売中の商品
+          if sale_now
+            @search_target_sale = true
+          else
+            @search_target_sale = false
+          end
+
+        when "2" #売り切れの商品
+          if sale_now
+            @search_target_sale = false
+          else
+            @search_target_sale = true
+          end
 
       end
 
     end
 
     def target_price(price_only_number)
-      if price_only_number.to_i > @max_price
+      case params[:price_selected]
+
+        when "0" #指定なし
+          max_price = 9999999
+
+        when "1" #1000円
+          max_price = 1000
+
+        when "2" #3000円
+          max_price = 3000
+
+        when "3" #5000円
+          max_price = 5000
+
+        when "4" #10000円
+          max_price = 10000
+
+        when "5" #30000円
+          max_price = 30000
+
+        when "6" #50000円
+          max_price = 50000
+
+        when "7" #100000円
+          max_price = 100000
+
+      end
+
+      if price_only_number.to_i > max_price.to_i
         @search_target_price = false
       else
         @search_target_price = true
@@ -493,11 +515,11 @@ class PagesController < ApplicationController
 
     def result_sort(sort_target)
       case params[:sort_selected]
-      when "0" #値段の安い順
-        @result_all = sort_target.sort { |a, b| b["for_sort_price"][/\d+/].to_i <=> a["for_sort_price"][/\d+/].to_i }.reverse
+        when "0" #値段の安い順
+          @result_all = sort_target.sort { |a, b| b["for_sort_price"][/\d+/].to_i <=> a["for_sort_price"][/\d+/].to_i }.reverse
 
-      when "1" #値段の高い順
-        @result_all = sort_target.sort { |a, b| b["for_sort_price"][/\d+/].to_i <=> a["for_sort_price"][/\d+/].to_i }
+        when "1" #値段の高い順
+          @result_all = sort_target.sort { |a, b| b["for_sort_price"][/\d+/].to_i <=> a["for_sort_price"][/\d+/].to_i }
 
       end
     end

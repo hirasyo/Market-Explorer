@@ -3,7 +3,6 @@ $ ->
   $loading = $('.js-loading')
   $search_wrapper = $('.search_wrapper')
   $search_btn = $('.search_btn')
-  $max_price_box = $('.conditions_price')
   $target_flema_all = $('.target_flema_all')
   $target_flema = $('.target_flema')
   $target_used_all = $('.target_used_all')
@@ -17,11 +16,6 @@ $ ->
 
   $search_btn.on 'click', ->
       $loading.show()
-
-  $max_price_box.on 'keydown', ->
-      # 0～9, テンキ―0～9以外は入力キャンセル
-      if(!((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e.keyCode <= 105)))
-          return false
 
   $target_flema_all.on 'click', ->
       $target_flema.prop('checked', this.checked)

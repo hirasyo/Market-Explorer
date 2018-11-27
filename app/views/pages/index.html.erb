@@ -4,7 +4,7 @@
       <div class="search_wrapper">
         <h2 class="search_title">Market Explorer</h2>
         <div id="request_ajax_update" class="search_status">
-          <%= form_with method: :post, url: pages_search_path do |form| %>
+          <%= form_with method: :get, url: pages_search_path do |form| %>
             <div class="search_status_target_title"><%= form.label("検索サイト") %></div>
             <div class="search_status_target">
               <%= check_box_tag "target_flema", true, true, {:class => "target_flema_all"}  %>
@@ -40,7 +40,7 @@
             <div class="search_status_keyword_title"><%= form.label("検索ワード") %></div>
             <div class="search_status_keyword">
               <%= form.text_field :keyword , class: 'keyword_text_field'%><br>
-            </div><br>
+            </div>
             <div class="search_status_select">
               <div class="search_status_conditions">
                 <%= form.select :conditions_selected, ApplicationRecord.conditions_selections.to_a, {}, class: 'selections_conditions_box' %>を
@@ -50,8 +50,7 @@
               </div>
               <div class="search_status_price">
                 <%= form.label("上限金額") %>
-                <%= number_field(:conditions_price, :max_price, class: 'max_price_box', min: '0', step: '100') %>
-                <span class="search_status_price_max"> 円まで</span><br>
+                <%= form.select :price_selected, ApplicationRecord.price_selections.to_a, {}, class: 'selections_price_box' %>
               </div>
             </div>
             <div class="search_status_search_btn">
